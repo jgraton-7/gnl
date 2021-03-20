@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:52 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/18 16:45:37 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:07:14 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strdup(const char *s)
 		cpy[count] = s[count];
 		count++;
 	}
-	cpy[count] = 0;
+	cpy[count] = '\0';
 	return (cpy);
 }
 
@@ -88,3 +88,27 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+	size_t	count;
+	size_t	c2;
+
+	if (!(str = malloc(sizeof(*s) * len + 1)))
+		return (NULL);
+	if (!s)
+		return (NULL);
+	count = 0;
+	c2 = 0;
+	while (s[c2++])
+	{
+		if (c2 >= start && count < len)
+		{
+			str[count] = s[start];
+			count++;
+			start++;
+		}
+	}
+	str[count] = '\0';
+	return (str);
+}

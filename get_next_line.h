@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:35:03 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/18 16:07:24 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/19 19:07:31 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,4 @@ char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 int get_next_line(int fd, char **line);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
