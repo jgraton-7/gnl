@@ -6,13 +6,24 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/19 19:25:15 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/22 15:07:56 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 #include "get_next_line.h"
+
+char *ft_concatenar(char *buffer, char *str)
+{
+    char *tmp;
+    
+    tmp = ft_strjoin(str, buffer);
+    free(str);
+    str = ft_strdup(tmp);
+    free(tmp);
+    return (str);
+}
 
 char *ft_insert_in_line(char *str,char **line, int count)
 {
@@ -41,18 +52,6 @@ char *ft_insert_in_line(char *str,char **line, int count)
     return (str);
 }
 
-
-char *ft_concatenar(char *buffer, char *str)
-{
-    char *tmp;
-    
-    tmp = ft_strjoin(str, buffer);
-    free(str);
-    str = ft_strdup(tmp);
-    free(tmp);
-    return (str);
-}
-
 int get_next_line(int fd, char **line)
 {
     static char *str;
@@ -69,11 +68,11 @@ int get_next_line(int fd, char **line)
         if(ft_strchr(str, '\n'))
             break;
     }
-    if(count <= 0 && !str)
+    if(count == 0 && !str)
     {
         *line = ft_strdup("");
         return (count);
     }
-    
+    str = ft_insert_in_line(str, line, count);
     return (1);
 }
