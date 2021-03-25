@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/22 15:07:56 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/25 17:45:45 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,51 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
-char *ft_concatenar(char *buffer, char *str)
-{
-    char *tmp;
-    
-    tmp = ft_strjoin(str, buffer);
-    free(str);
-    str = ft_strdup(tmp);
-    free(tmp);
-    return (str);
-}
-
 char *ft_insert_in_line(char *str,char **line, int count)
 {
     int c2;
     char *tmp;
 
     c2 = 0;
-    while(str[c2++])
+    while(str[c2])
     {
         if(str[c2] == '\n')       
             break ;
+        c2++;
     }
-    if(count == 0)
+    if((size_t)c2 < ft_strlen(str))
     {
-        *line = str;
-        str = 0;
-    }
-    else if((size_t)c2 < ft_strlen(str))
-    {
-        *line = ft_substr(str,0, 1);
-        tmp = ft_substr(str,c2 + 1,  ft_strlen(str));
+        *line = ft_substr(str, 0, 1);
+        tmp = ft_substr(str, (size_t)c2 + 1,  ft_strlen(str));
         free(str);
         str =  ft_strdup(tmp);
         free(tmp);
     }
+    else if(count == 0)
+    {
+        *line = str;
+        str = NULL;
+    }
     return (str);
 }
+
+char *ft_concatenar(char *buffer, char *str)
+{
+    char *tmp;
+    if(str)
+    {
+        tmp = ft_strjoin(str, buffer);
+        free(str);
+        str = ft_strdup(tmp);
+        free(tmp);
+    }
+    else
+    {
+      str = ft_strdup(buffer);  
+    }
+    return (str);
+}
+
 
 int get_next_line(int fd, char **line)
 {
@@ -58,7 +66,6 @@ int get_next_line(int fd, char **line)
     char buffer[BUFFER_SIZE + 1];
     int count;
 
-    count = 0;
     while((count = read(fd, buffer, BUFFER_SIZE)))
     {
         if(count == -1)
@@ -68,11 +75,16 @@ int get_next_line(int fd, char **line)
         if(ft_strchr(str, '\n'))
             break;
     }
-    if(count == 0 && !str)
+    if(count <= 0 && !str)
     {
         *line = ft_strdup("");
         return (count);
     }
     str = ft_insert_in_line(str, line, count);
+    if(count <= 0 && !str)
+    {
+        *line = ft_strdup("");
+        return (count);
+    }
     return (1);
 }
