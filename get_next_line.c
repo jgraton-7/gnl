@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/25 17:45:45 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/29 22:53:17 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,32 @@
 #include <stdio.h>
 #include "get_next_line.h"
 
+int ft_len_fist_line(char *str, int count)
+{
+    while (str[count])
+    {
+        if(str[count] == '\n')
+            break ;
+        count++;
+    }
+    return(count);
+}
+
 char *ft_insert_in_line(char *str,char **line, int count)
 {
-    int c2;
+    size_t c2;
     char *tmp;
 
-    c2 = 0;
-    while(str[c2])
-    {
-        if(str[c2] == '\n')       
-            break ;
-        c2++;
-    }
-    if((size_t)c2 < ft_strlen(str))
+    c2 = ft_len_fist_line(str, 0);
+    if(c2 < ft_strlen(str))
     {
         *line = ft_substr(str, 0, 1);
-        tmp = ft_substr(str, (size_t)c2 + 1,  ft_strlen(str));
+        tmp = ft_substr(str, c2 + 1,  ft_strlen(str));
         free(str);
         str =  ft_strdup(tmp);
         free(tmp);
     }
-    else if(count == 0)
+    else if (count == 0)
     {
         *line = str;
         str = NULL;
@@ -45,6 +50,7 @@ char *ft_insert_in_line(char *str,char **line, int count)
 char *ft_concatenar(char *buffer, char *str)
 {
     char *tmp;
+    
     if(str)
     {
         tmp = ft_strjoin(str, buffer);
@@ -53,9 +59,7 @@ char *ft_concatenar(char *buffer, char *str)
         free(tmp);
     }
     else
-    {
-      str = ft_strdup(buffer);  
-    }
+        str = ft_strdup(buffer);  
     return (str);
 }
 
@@ -82,9 +86,6 @@ int get_next_line(int fd, char **line)
     }
     str = ft_insert_in_line(str, line, count);
     if(count <= 0 && !str)
-    {
-        *line = ft_strdup("");
         return (count);
-    }
     return (1);
 }
