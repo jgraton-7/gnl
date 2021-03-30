@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/29 22:53:17 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:18:19 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ char *ft_insert_in_line(char *str,char **line, int count)
 {
     size_t c2;
     char *tmp;
+    size_t c3;
 
     c2 = ft_len_fist_line(str, 0);
-    if(c2 < ft_strlen(str))
+    c3 = ft_strlen(str);
+    if (c2 < c3)
     {
-        *line = ft_substr(str, 0, 1);
-        tmp = ft_substr(str, c2 + 1,  ft_strlen(str));
+        *line = ft_substr(str, 0, c2);
+        tmp = ft_substr(str, c2 + 1,  c3);
         free(str);
         str =  ft_strdup(tmp);
         free(tmp);
