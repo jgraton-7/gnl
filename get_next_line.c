@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/30 20:18:19 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:24:17 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,27 @@ int ft_len_fist_line(char *str, int count)
     return(count);
 }
 
+char *ft_swap(char *str, char **line, size_t c2, size_t c3)
+{
+    char *tmp;
+    
+    *line = ft_substr(str, 0, c2);
+    tmp = ft_substr(str, c2 + 1,  c3);
+    free(str);
+    str =  ft_strdup(tmp);
+    free(tmp);
+    return (str);
+}
+
 char *ft_insert_in_line(char *str,char **line, int count)
 {
     size_t c2;
-    char *tmp;
     size_t c3;
 
     c2 = ft_len_fist_line(str, 0);
     c3 = ft_strlen(str);
     if (c2 < c3)
-    {
-        *line = ft_substr(str, 0, c2);
-        tmp = ft_substr(str, c2 + 1,  c3);
-        free(str);
-        str =  ft_strdup(tmp);
-        free(tmp);
-    }
+        str = ft_swap(str, line, c2, c3);
     else if (count == 0)
     {
         *line = str;
