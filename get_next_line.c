@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/01 15:55:54 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/01 17:28:27 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,23 @@ int ft_len_fist_line(char *str, int count)
     return(count);
 }
 
-char *ft_swap(char *str, char **line, size_t c2, size_t c3)
-{
-    char *tmp;
-    
-    *line = ft_substr(str, 0, c2);
-    tmp = ft_substr(str, c2 + 1,  c3);
-    free(str);
-    str =  ft_strdup(tmp);
-    free(tmp);
-    return (str);
-}
-
 char *ft_insert_in_line(char *str,char **line, int count)
 {
-    size_t c2;
+    int c2;
     size_t c3;
+    char *tmp;
 
     c2 = ft_len_fist_line(str, 0);
     c3 = ft_strlen(str);
-    if (c2 < c3)
-        str = ft_swap(str, line, c2, c3);
+    if ((size_t)c2 < c3)
+    {
+        *line = ft_substr(str, 0, c2);
+        tmp = ft_substr(str, c2 + 1,  c3);
+        free(str);
+        str =  ft_strdup(tmp);
+        free(tmp);
+        return (str);
+    }
     else if (count == 0)
     {
         *line = str;
@@ -69,21 +65,20 @@ char *ft_concatenar(char *buffer, char *str)
         str = ft_strdup(buffer);  
     return (str);
 }
-
-int ft_size_buffer(int buf)
+int ft_size_buf(int buf)
 {
-    if(buf > 1000000)
-        return (4096);
+    if (BUFFER_SIZE > 1000000)
+        return (100000);
     else
         return (buf);
     return (buf);
+        
 }
-
 
 int get_next_line(int fd, char **line)
 {
     static char *str;
-    char buffer[ft_size_buffer(BUFFER_SIZE)];
+    char buffer[ft_size_buf(BUFFER_SIZE + 1)];
     int count;
 
     while((count = read(fd, buffer, BUFFER_SIZE)))
