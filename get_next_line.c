@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/02 16:08:29 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/02 17:52:39 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,6 @@ char *ft_concatenar(char *buffer, char *str)
     else
         str = ft_strdup(buffer);  
     return (str);
-}
-int ft_size_buf(int buf)
-{
-    if (BUFFER_SIZE > MAX_BUFFER)
-        return (8192);
-    else
-        return (buf);
-    return (buf);
-        
 }
 
 int get_next_line(int fd, char **line)
