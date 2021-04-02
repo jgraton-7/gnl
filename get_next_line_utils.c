@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:52 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/03/19 19:07:14 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:06:20 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ size_t	ft_strlen(const char *s)
 
 	count = 0;
 	while (s[count] != '\0')
-	{
 		count++;
-	}
 	return (count);
 }
 
@@ -57,7 +55,7 @@ char	*ft_strdup(const char *s)
 	int		count;
 
 	count = 0;
-	if (!(cpy = (char *)malloc(sizeof(*s) * ft_strlen(s) + 1)))
+	if (!(cpy = (char *)malloc(sizeof(const char) * (ft_strlen(s) + 1))))
 		return (0);
 	while (s[count])
 	{
@@ -94,7 +92,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	count;
 	size_t	c2;
 
-	if (!(str = malloc(sizeof(*s) * len + 1)))
+	if (!(str = malloc(sizeof(*s) * (len + 1))))
 		return (NULL);
 	if (!s)
 		return (NULL);

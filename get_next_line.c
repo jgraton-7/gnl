@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/01 17:28:27 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/02 16:08:29 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ char *ft_concatenar(char *buffer, char *str)
 }
 int ft_size_buf(int buf)
 {
-    if (BUFFER_SIZE > 1000000)
-        return (100000);
+    if (BUFFER_SIZE > MAX_BUFFER)
+        return (8192);
     else
         return (buf);
     return (buf);
@@ -78,7 +78,7 @@ int ft_size_buf(int buf)
 int get_next_line(int fd, char **line)
 {
     static char *str;
-    char buffer[ft_size_buf(BUFFER_SIZE + 1)];
+    static char buffer[BUFFER_SIZE + 1];
     int count;
 
     while((count = read(fd, buffer, BUFFER_SIZE)))
