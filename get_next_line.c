@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/02 17:52:39 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/02 20:57:14 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,25 @@ char *ft_concatenar(char *buffer, char *str)
     return (str);
 }
 
+int ft_error_paramets(int fd, char **line)
+{
+    if (fd <=  0)
+return (1);
+    if (BUFFER_SIZE <= 0)
+return (1);
+    if (line == NULL)
+return (1);
+    return (0);
+}
+
 int get_next_line(int fd, char **line)
 {
     static char *str;
     static char buffer[BUFFER_SIZE + 1];
     int count;
-
+    
+    if(ft_error_paramets(fd, line) == 1)
+        return (-1);
     while((count = read(fd, buffer, BUFFER_SIZE)))
     {
         if(count == -1)
