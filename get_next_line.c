@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/04 15:53:41 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/04 16:11:53 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int		get_next_line(int fd, char **line)
 	static char	buffer[BUFFER_SIZE + 1];
 	int			count;
 
+	if (ft_error_paramets(fd, line) == 1)
+		return (-1);
 	while ((count = read(fd, buffer, BUFFER_SIZE)))
 	{
 		if (count == -1)
