@@ -6,7 +6,7 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/02 20:57:14 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/03 20:33:35 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char *ft_concatenar(char *buffer, char *str)
 
 int ft_error_paramets(int fd, char **line)
 {
-    if (fd <=  0)
+    if (fd < 0)
 return (1);
     if (BUFFER_SIZE <= 0)
 return (1);
