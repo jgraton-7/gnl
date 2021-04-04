@@ -6,12 +6,10 @@
 /*   By: jgraton- <jgraton-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 21:34:33 by jgraton-          #+#    #+#             */
-/*   Updated: 2021/04/04 15:49:22 by jgraton-         ###   ########.fr       */
+/*   Updated: 2021/04/04 15:53:41 by jgraton-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "get_next_line.h"
 
 int		ft_len_fist_line(char *str, int count)
